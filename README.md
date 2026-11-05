@@ -41,16 +41,16 @@ Para preparar os arquivos de produção após a aprovação de lançamento, conf
 ## Dependências de lançamento
 
 1. Confirmar o número oficial de WhatsApp Business e preencher `contact.whatsappBusiness` em formato internacional. Verificar o destino antes de habilitar o link.
-2. Escolher o serviço ou backend que receberá os quatro campos. Implementar validação no servidor, limitação de abuso e spam, acesso restrito, mensagens de erro e confirmação baseada em resposta real. Rever CSP para liberar somente o destino necessário e testar a entrega de ponta a ponta. A prévia mantém o envio bloqueado e não persiste valores.
+2. O formulário prepara um briefing local para revisão e cópia. Com o número comercial configurado, a página oferece conversa direta e abertura do briefing no WhatsApp. Para recebimento direto pelo site, integrar um serviço de envio e implementar validação no servidor, proteção contra abuso e acesso restrito aos contatos.
 3. Atualizar o aviso de privacidade conforme o fluxo real, com identificação do responsável, canal de privacidade, finalidade, acesso e retenção.
 4. Confirmar domínio, política de acesso e ambiente de produção. Medir Core Web Vitals de campo quando o domínio tiver tráfego suficiente. A URL do Atlas só deve ser inserida quando houver um destino que corresponda ao recurso oferecido.
 5. Substituir o raster apenas quando houver versão vetorial oficial aprovada.
 
 ## Verificação
 
-Build e checagem das 14 rotas, dos títulos, referências locais, imagens, labels e indexação. Revisão no Chrome desktop e em molduras de 320 e 390 px. Fluxo de navegação Serviço → Solicitar orçamento → serviço pré-selecionado → Privacidade. Bloqueio de envio confirmado no navegador.
+Build e checagem das 14 rotas, dos títulos, referências locais, imagens, labels e indexação. Revisão no Chrome desktop e em molduras de 320 e 390 px. Fluxo de navegação Serviço → Solicitar orçamento → serviço pré-selecionado → Privacidade. O formulário revisa os dados antes do compartilhamento.
 
-O tamanho em gzip local de HTML e CSS é medido por `npm run check`. Essa medida representa compressão de arquivos em laboratório e não o tempo de carregamento nem os Core Web Vitals de usuários. A home carrega um script curto para controlar a rede neural e as animações. O formulário carrega seu próprio script de pré-seleção. O envio de leads depende de integração real.
+O tamanho em gzip local de HTML e CSS é medido por `npm run check`. Essa medida representa compressão de arquivos em laboratório e não o tempo de carregamento nem os Core Web Vitals de usuários. A home carrega um script curto para controlar a rede neural e as animações. O formulário carrega seu próprio script de pré-seleção, validação e revisão do briefing. O envio de leads depende de integração real.
 
 
 ## Movimento no site

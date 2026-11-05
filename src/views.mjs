@@ -237,34 +237,97 @@ const whatsapp = contact.whatsappBusiness;
 if (whatsapp !== null && !/^55[1-9]\d{9,10}$/.test(whatsapp)) {
   throw new Error('Informe o número oficial brasileiro em formato internacional.');
 }
+const whatsappUrl = whatsapp ? 'https://wa.me/' + whatsapp : '';
 
 const contactPage = `
-${pageIntro('Contato comercial', 'Solicitar orçamento.',
-  'Conte em poucas linhas o que você precisa. O briefing detalhado vem depois da conversa inicial.')}
-<section class="wrap section compact contact-grid">
-  <div class="body-copy"><h2>Canais de atendimento</h2>
-  ${whatsapp ? link('https://wa.me/' + whatsapp, 'WhatsApp Business') : '<p>O link do WhatsApp Business será liberado após a confirmação do número oficial.</p>'}
-  <p>Os projetos são avulsos e o investimento é definido por proposta, conforme o escopo.</p>
-  ${link('/privacidade/', 'Consultar aviso de privacidade')}</div>
-  <div class="contact-panel"><h2>Seu projeto</h2><p id="form-status">Prévia do formulário. O recebimento de solicitações está pendente de integração. Use apenas dados fictícios para experimentar os campos.</p>
-  <form id="quote-form" aria-describedby="form-status" autocomplete="off">
-    <label for="name">Nome</label><input id="name" type="text" maxlength="120" required>
-    <label for="reply">Contato</label><input id="reply" type="text" maxlength="160" placeholder="E-mail ou WhatsApp" required>
-    <label for="service">Serviço de interesse</label><select id="service" required>
-      <option value="">Selecione uma opção</option>
-      ${services.map(service => `<option value="${service.slug}">${service.title}</option>`).join('')}
-      <option value="portfolio-profissional">Portfólio profissional (sites)</option>
-      <option value="a-definir">Ainda preciso definir</option>
-    </select>
-    <label for="goal">Objetivo em poucas linhas</label><textarea id="goal" maxlength="500" rows="4" required></textarea>
-    <button class="button" type="submit" disabled>Envio indisponível na prévia</button>
-  </form></div></section>`;
+<section class="quote-intro"><div class="wrap page-intro">
+  ${heading('Contato comercial', 'Solicitar orçamento.',
+    'Conte o que você quer colocar no ar, melhorar ou automatizar. Usamos essas informações para entender o projeto e preparar uma proposta de acordo com o escopo.')}
+</div></section>
+<section class="wrap section compact quote-layout">
+  <aside class="quote-sidebar" aria-label="Canais e próximos passos">
+    <div class="quote-channel glass">
+      <span class="holo-icon">${icon('M7 10h34v24H20l-9 6v-6H7z M14 19h20 M14 25h15')}</span>
+      <h2>Prefere conversar?</h2>
+      <p>Comece pelo WhatsApp e conte sua ideia no seu ritmo.</p>
+      ${whatsappUrl ? link(whatsappUrl, 'Conversar no WhatsApp', true) : '<p class="quote-channel-status">O WhatsApp será liberado após a configuração do número comercial.</p>'}
+    </div>
+    <div class="quote-next">
+      <h2>Como o orçamento é preparado</h2>
+      <dl>
+        <div><dt>Entendemos seu objetivo</dt><dd>O briefing ajuda a identificar o que você precisa e o que já tem em mãos.</dd></div>
+        <div><dt>Alinhamos escopo e prazos</dt><dd>Se faltar algum detalhe, conversamos para definir prioridades.</dd></div>
+        <div><dt>Apresentamos a proposta</dt><dd>Você recebe as entregas previstas, os prazos e o investimento para avaliar.</dd></div>
+      </dl>
+    </div>
+  </aside>
+  <div class="contact-panel quote-panel glass">
+    <div class="quote-panel-heading">
+      <div><p class="label">Briefing inicial</p><h2>Conte sobre seu projeto</h2></div>
+      <span class="quote-tag">Orçamento sob medida</span>
+    </div>
+    <p id="form-status">Preencha os campos obrigatórios. Se ainda estiver definindo o projeto, deixe os detalhes opcionais em branco.</p>
+    <form id="quote-form" data-whatsapp-url="${whatsappUrl}" aria-describedby="form-status">
+      <fieldset>
+        <legend>Seus dados</legend>
+        <div class="quote-fields">
+          <div><label for="name">Nome</label><input id="name" name="name" autocomplete="name" maxlength="100" required></div>
+          <div><label for="reply">E-mail ou WhatsApp com DDD</label><input id="reply" name="reply" maxlength="120" placeholder="Seu melhor contato" required></div>
+          <div class="quote-wide"><label for="business">Empresa ou marca <small>Opcional</small></label><input id="business" name="business" autocomplete="organization" maxlength="100"></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>O que você precisa</legend>
+        <div class="quote-fields">
+          <div><label for="service">Serviço de interesse</label><select id="service" name="service" required>
+            <option value="">Selecione uma opção</option>
+            ${services.map(service => `<option value="${service.slug}">${service.title}</option>`).join('')}
+            <option value="portfolio-profissional">Portfólio profissional</option>
+            <option value="a-definir">Ainda preciso definir</option>
+          </select></div>
+          <div><label for="stage">Momento do projeto <small>Opcional</small></label><select id="stage" name="stage">
+            <option value="">Selecione, se souber</option>
+            <option>Começar do zero</option><option>Melhorar algo existente</option><option>Substituir uma solução</option>
+          </select></div>
+          <div class="quote-wide"><label for="goal">O que você quer alcançar?</label><textarea id="goal" name="goal" minlength="10" maxlength="800" rows="4" placeholder="Ex.: Quero apresentar meus serviços e receber pedidos de orçamento." aria-describedby="goal-help" required></textarea><small class="quote-help" id="goal-help">Conte seu objetivo e o que gostaria de incluir no projeto.</small></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Prazos e referências</legend>
+        <div class="quote-fields">
+          <div><label for="deadline">Prazo desejado <small>Opcional</small></label><select id="deadline" name="deadline">
+            <option value="">Sem prazo definido</option><option>Em até 30 dias</option><option>Entre 1 e 2 meses</option><option>Mais de 2 meses</option>
+          </select></div>
+          <div><label for="budget">Orçamento previsto <small>Opcional</small></label><input id="budget" name="budget" maxlength="70" placeholder="Ex.: até R$ 3.000"></div>
+          <div class="quote-wide"><label for="reference">Site atual ou referência <small>Opcional</small></label><input id="reference" name="reference" type="url" maxlength="220" placeholder="https://"></div>
+        </div>
+      </fieldset>
+      <div class="quote-submit">
+        <p>Confira o briefing antes de compartilhar. <a href="/privacidade/">Aviso de privacidade</a></p>
+        <button class="button" id="quote-review" type="submit" disabled>Revisar briefing <span aria-hidden="true">↗</span></button>
+      </div>
+      <noscript><p>Ative o JavaScript para montar o resumo do briefing.</p></noscript>
+    </form>
+    <dialog class="quote-dialog" id="quote-dialog" aria-labelledby="quote-dialog-title">
+      <h2 id="quote-dialog-title">Confira seu briefing</h2>
+      <p>${whatsappUrl ? 'Você pode copiar o resumo ou abrir o WhatsApp com a mensagem preenchida. O envio acontece na conversa.' : 'O resumo fica no seu navegador. Você pode copiá-lo para compartilhar quando quiser.'}</p>
+      <label for="quote-summary">Resumo do projeto</label>
+      <textarea id="quote-summary" rows="9" readonly></textarea>
+      <div class="quote-dialog-actions">
+        ${whatsappUrl ? '<a class="button" id="quote-send">Abrir briefing no WhatsApp</a>' : ''}
+        <button class="button quote-secondary" id="quote-copy" type="button">Copiar briefing</button>
+        <button class="button quote-secondary" id="quote-close" type="button">Voltar ao formulário</button>
+      </div>
+      <p class="quote-copy-status" id="quote-copy-status" role="status"></p>
+    </dialog>
+  </div>
+</section>`;
 
 const privacyPage = `
 ${pageIntro('Privacidade', 'Aviso de privacidade da prévia.',
   'Este aviso descreve como funciona a versão restrita do site institucional da Qalyon.')}
 <section class="wrap section compact prose body-copy">
-  <h2>Campos de orçamento</h2><p>Os campos exibidos em Contato servem para avaliar a experiência. O site não envia nem armazena os valores digitados. Use dados fictícios ao testar a página.</p>
+  <h2>Campos de orçamento</h2><p>O briefing é montado no navegador. O site não guarda os valores digitados. Se você abrir o briefing no WhatsApp, o texto será encaminhado ao serviço para preencher a conversa. Você decide quando enviar a mensagem.</p>
   <h2>Cookies e infraestrutura</h2><p>A aplicação não instala cookies próprios de rastreamento e não inclui pixels de publicidade ou ferramentas de análise de comportamento. A plataforma de hospedagem e de acesso pode tratar dados técnicos para autenticação, funcionamento e segurança.</p>
   <h2>Atendimento comercial</h2><p>Antes de ativar o recebimento de solicitações, este aviso será atualizado com a identificação do responsável pelo tratamento, canal de privacidade e detalhes sobre uso, retenção e acesso aos dados recebidos.</p>
   ${link('/contato/', 'Voltar para contato')}</section>`;
@@ -278,7 +341,7 @@ export const pages = [
   { path: '/projetos/', title: 'Projetos e demonstrações — Qalyon', description: 'Explore o mostruário autoral da Qalyon, com exemplos de portfólio profissional, landing page e sistema web.', body: projectsPage },
   ...projects.map(project => ({ path: projectPath(project), title: project.title + ' — Demonstração Qalyon', description: project.summary, body: projectPage(project) })),
   { path: '/sobre/', title: 'Sobre a Qalyon — Software house', description: 'Entenda como a Qalyon cria produtos SaaS e desenvolve soluções digitais sob medida.', body: aboutPage },
-  { path: '/contato/', title: 'Solicitar orçamento — Qalyon', description: 'Veja os canais de contato e o formulário curto de orçamento para projetos digitais da Qalyon.', body: contactPage, script: '/assets/contact.js' },
+  { path: '/contato/', title: 'Solicitar orçamento — Qalyon', description: 'Prepare um briefing para seu projeto digital ou consulte o canal de atendimento da Qalyon.', body: contactPage, script: '/assets/contact.js' },
   { path: '/privacidade/', title: 'Aviso de privacidade — Qalyon', description: 'Entenda o tratamento de dados adotado na versão restrita do site da Qalyon.', body: privacyPage },
 ];
 

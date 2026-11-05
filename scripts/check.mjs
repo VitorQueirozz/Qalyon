@@ -38,8 +38,10 @@ assert.doesNotMatch(home, /<video\b|\.mp4/);
 await access(join('dist', 'assets', 'neural.js'));
 const form = await readFile('dist/contato/index.html', 'utf8');
 assert.match(form, /form-action 'none'/);
-assert.match(form, /type="submit" disabled/);
-assert.equal([...form.matchAll(/<label for=/g)].length, 4);
+assert.match(form, /id="quote-review" type="submit" disabled/);
+for (const id of ['name', 'reply', 'service', 'goal', 'deadline', 'budget', 'reference']) {
+  assert.ok(form.includes('<label for="' + id + '">'), 'Campo sem rótulo: ' + id);
+}
 
 console.log(`${pages.length} rotas validadas: metadados, links, imagens, campos e modo de indexação.`);
 for (const file of ['index.html', 'assets/tokens.css', 'assets/styles.css', 'assets/contact.js']) {
