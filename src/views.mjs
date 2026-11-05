@@ -25,10 +25,43 @@ const serviceList = () => `<div class="service-list">${services.map(service => `
   <article><h3>${service.title}</h3>
   <p>${service.summary}</p>${link(servicePath(service), 'Conhecer ' + service.title.toLowerCase())}</article>`).join('')}</div>`;
 
-const projectCards = (items = projects) => `<div class="cards">${items.map(project => `
-  <article class="card">${picture(project.image)}<div class="card-copy">
-  <p class="label">${project.kind}</p><h3>${project.title}</h3><p>${project.summary}</p>
-  ${link(projectPath(project), project.kind === 'Demonstração' ? 'Ver demonstração' : 'Ver projeto')}</div></article>`).join('')}</div>`;
+const projectPreview = project => {
+  if (project.service === 'landing-pages') {
+    return `<div class="project-preview preview-landing" aria-hidden="true">
+      <div class="preview-browser">
+        <div class="preview-browser-bar"><i></i><i></i><i></i></div>
+        <div class="preview-landing-body"><span>CASA EM DIA</span><strong>Seu espaço, bem cuidado.</strong>
+          <small>Pedir orçamento ↗</small></div>
+        <div class="preview-landing-shape"></div>
+      </div>
+    </div>`;
+  }
+  if (project.service === 'sistemas-web') {
+    return `<div class="project-preview preview-system" aria-hidden="true">
+      <div class="preview-browser">
+        <div class="preview-browser-bar"><i></i><i></i><i></i></div>
+        <div class="preview-system-body"><span>ORDENS DE SERVIÇO</span><strong>Visão da operação</strong>
+          <div><i></i> Agendar <b>OS-101</b></div>
+          <div><i></i> Em execução <b>OS-102</b></div>
+          <div><i></i> Concluído <b>OS-103</b></div>
+        </div>
+      </div>
+    </div>`;
+  }
+  return `<div class="project-preview preview-portfolio">${picture(project.image)}</div>`;
+};
+
+const projectCards = () => `<div class="cards showcase-grid">${projects.map(project => `
+  <article class="card showcase-card">
+    ${projectPreview(project)}
+    <div class="card-copy">
+      <p class="showcase-meta"><span>${project.category}</span><span>${project.kind}</span></p>
+      <h3>${project.title}</h3><p>${project.summary}</p>
+      <a class="showcase-link" href="${projectPath(project)}" aria-label="Ver demonstração: ${escape(project.title)}">
+        Ver demonstração <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </article>`).join('')}</div>`;
 
 const productCards = () => `<div class="product-list">${products.map(product => `
   <article class="atlas-card"><div><p class="label">Produto próprio / ${product.status}</p>
@@ -164,9 +197,11 @@ const home = `
 <section class="wrap section">${sectionTitle('Serviços digitais', 'O projeto certo para o seu objetivo.',
   'Desenvolvimento para profissionais autônomos, pequenos negócios e equipes com necessidades próprias.')}
   ${serviceList()}</section>
-<section class="tinted"><div class="wrap section">${sectionTitle('Mostruário', 'Veja como uma ideia ganha forma.',
-  'Demonstrações autorais para explorar soluções, conteúdo e navegação em diferentes contextos.')}
-  ${projectCards(projects.slice(0, 2))}${link('/projetos/', 'Explorar o mostruário')}</div></section>
+<section class="tinted showcase-section"><div class="wrap section">
+  <div class="showcase-heading"><div>${sectionTitle('Mostruário', 'Da apresentação à operação.',
+  'Um portfólio para mostrar trabalhos, uma página para apresentar uma oferta e um painel para acompanhar serviços.')}</div>
+  ${link('/projetos/', 'Explorar o mostruário')}</div>
+  ${projectCards()}</div></section>
 <section class="wrap section">${sectionTitle('Produtos próprios', 'Software para processos do dia a dia.')}${productCards()}</section>
 ${flowSection}
 ${metricsSection}
@@ -218,7 +253,7 @@ const projectPage = project => `
 ${pageIntro('Mostruário / ' + project.kind, project.title, project.summary)}
 <section class="wrap section compact"><div class="demo">
   <p class="label">${project.kind === 'Demonstração' ? 'Amostra visual / cenário fictício' : 'Apresentação do projeto'}</p><div class="split">
-  <div><h2>${project.exampleTitle}</h2><p>${project.exampleText}</p></div>${picture(project.image)}</div>
+  <div><h2>${project.exampleTitle}</h2><p>${project.exampleText}</p></div>${projectPreview(project)}</div>
   <ol class="demo-items">${project.sections.map(item => `<li>${item}</li>`).join('')}</ol></div>
   <div class="actions">${link('/projetos/', 'Voltar ao mostruário')}${quote(project.service)}</div></section>`;
 

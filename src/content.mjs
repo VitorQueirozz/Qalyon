@@ -65,6 +65,7 @@ export const products = [{
 export const projects = [
   {
     slug: 'portfolio-de-arquitetura', title: 'Portfólio de arquitetura', kind: 'Demonstração',
+    category: 'Portfólio profissional',
     summary: 'Uma presença digital para apresentar serviços, projetos e a forma de trabalho de um estúdio independente.',
     image: 'presence', service: 'portfolio-profissional',
     exampleTitle: 'Espaços para viver melhor.',
@@ -73,6 +74,7 @@ export const projects = [
   },
   {
     slug: 'landing-page-de-servicos', title: 'Landing page de serviços', kind: 'Demonstração',
+    category: 'Landing page',
     summary: 'Uma página de campanha para explicar uma oferta local e orientar o pedido de orçamento.',
     image: 'presence', service: 'landing-pages',
     exampleTitle: 'Cuide do seu espaço com um plano claro.',
@@ -81,6 +83,7 @@ export const projects = [
   },
   {
     slug: 'painel-de-ordens-de-servico', title: 'Painel de ordens de serviço', kind: 'Demonstração',
+    category: 'Sistema web',
     summary: 'Uma interface conceitual para visualizar etapas de atendimento em uma pequena operação.',
     image: 'systems', service: 'sistemas-web',
     exampleTitle: 'Acompanhe cada atendimento.',
