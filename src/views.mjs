@@ -67,7 +67,7 @@ const projectCards = () => `<div class="cards showcase-grid">${projects.map(proj
     ${projectPreview(project)}
     <div class="card-copy">
       <p class="showcase-meta"><span>${project.category}</span><span>${project.kind}</span></p>
-      <h3>${project.title}</h3><p>${project.summary}</p>
+      <h3>${project.title}</h3><p>${services.find(service => service.slug === project.service).summary}</p>
       <a class="showcase-link" href="${projectPath(project)}" aria-label="Ver demonstração: ${escape(project.title)}">
         Ver demonstração <span aria-hidden="true">↗</span>
       </a>

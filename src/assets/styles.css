@@ -552,12 +552,10 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
   background: radial-gradient(ellipse at 16% 0%, #b6f21a0d, transparent 52%), var(--q-graphite);
 }
 .showcase-heading { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 16px 28px; }
-.showcase-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
-.showcase-card { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); border-radius: 14px; }
-.showcase-card:first-child { grid-row: span 2; grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+.showcase-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.showcase-card { display: grid; grid-template-rows: auto 1fr; border-radius: 14px; }
 .showcase-card .card-copy { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(15px, 2vw, 24px); }
 .showcase-card h3 { font-size: clamp(1.25rem, 2.3vw, 1.75rem); }
-.showcase-card:first-child h3 { font-size: clamp(1.55rem, 3vw, 2.4rem); }
 .showcase-card .showcase-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; margin: 0 0 9px; font: .69rem/1.45 var(--mono); }
 .showcase-meta span:first-child { color: var(--q-lime); }
 .showcase-meta span + span { color: var(--q-text-secondary-dark); border: 1px solid var(--divider); border-radius: 4px; padding: 1px 5px; }
@@ -568,7 +566,6 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
 .showcase-card:is(:hover, :focus-within) { border-color: color-mix(in srgb, var(--q-lime) 38%, var(--divider)); box-shadow: 0 10px 28px #0004; }
 .project-preview { position: relative; min-width: 0; overflow: hidden; display: grid; place-items: center; aspect-ratio: 16 / 10; border-radius: 10px; }
 .showcase-card .project-preview { border-radius: 0; }
-.showcase-card:not(:first-child) .project-preview { aspect-ratio: auto; min-height: 192px; }
 .preview-portfolio .photo { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
 .preview-landing { background: #cbb59d; }
 .preview-system { background: #1b2e31; }
@@ -596,18 +593,11 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
 .preview-system-body > div { display: grid; grid-template-columns: 6px 1fr auto; align-items: center; gap: 4px; background: #20373a; padding: 3px 4px; border-radius: 3px; font-size: clamp(.50rem, .82vw, .72rem); white-space: nowrap; }
 .preview-system-body > div i { width: 4px; height: 4px; border-radius: 50%; background: #9bddde; }
 .preview-system-body > div b { color: #9bddde; font-weight: 400; }
-@media (max-width: 970px) {
-  .showcase-card:not(:first-child) { grid-template-columns: 1fr; }
-  .showcase-card:not(:first-child) .project-preview { aspect-ratio: 16 / 10; min-height: 0; }
-  .showcase-card:first-child { grid-row: auto; grid-column: 1 / -1; grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-}
 @media (max-width: 620px) {
-  .showcase-grid, .showcase-card:first-child { grid-template-columns: 1fr; }
+  .showcase-grid { grid-template-columns: 1fr; }
   .preview-landing-body, .preview-system-body { padding: 14px; }
 }
 
-.showcase-card:nth-child(4) { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
-.showcase-card:nth-child(4) .project-preview { aspect-ratio: auto; min-height: 200px; }
 .preview-institutional { background: #30284f; }
 .preview-institutional .preview-browser { background: #211b44; color: #fcf4df; }
 .preview-institutional-body { display: grid; grid-template-columns: 1.05fr 1fr; min-width: 0; align-items: center; }
@@ -616,7 +606,3 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
 .preview-institutional-body strong { font: 700 clamp(.95rem, 2vw, 1.7rem)/1.1 Georgia, serif; }
 .preview-institutional-body small { width: fit-content; padding: 2px 5px; color: #211b44; background: #e9dba8; font-size: clamp(.51rem, .8vw, .67rem); }
 .preview-institutional-body img { width: 100%; height: 100%; min-height: 105px; object-fit: cover; }
-@media (max-width: 620px) {
-  .showcase-card:nth-child(4) { grid-template-columns: 1fr; }
-  .showcase-card:nth-child(4) .project-preview { min-height: 0; aspect-ratio: 16 / 10; }
-}
