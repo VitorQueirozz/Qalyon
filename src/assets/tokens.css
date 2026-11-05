@@ -1,0 +1,60 @@
+/* QALYON PRECISION - ETAPA 02 - PALETA v1.0.0 - PALETA APROVADA */
+:root {
+  --q-lime: #B6F21A;
+  --q-lime-depth: #8CD90B;
+  --q-lime-soft: #D9FF8A;
+  --q-lime-ink-light: #365D0F;
+  --q-night: #0E1317;
+  --q-graphite: #1A1D21;
+  --q-surface: #242B30;
+  --q-slate: #4B5563;
+  --q-outline-dark: #697984;
+  --q-text-secondary-dark: #AEB8C2;
+  --q-off-white: #F8FAFC;
+  --q-paper: #FFFFFF;
+  --q-light-bg: #F4F7F2;
+  --q-light-ink: #152019;
+  --q-light-muted: #48534B;
+  --q-success-dark: #59D7A1;
+  --q-info-dark: #62C9FF;
+  --q-warning-dark: #FFCD70;
+  --q-danger-dark: #FF8084;
+  --q-success-light: #1D6E49;
+  --q-info-light: #175E85;
+  --q-warning-light: #86500A;
+  --q-danger-light: #A3263B;
+  --q-radius: 14px;
+}
+
+/* Tema escuro (padrao institucional) */
+[data-theme="dark"], .theme-dark {
+  color-scheme: dark;
+  --q-bg: var(--q-night);
+  --q-bg-elevated: var(--q-graphite);
+  --q-fg: var(--q-off-white);
+  --q-fg-muted: var(--q-text-secondary-dark);
+  --q-link: var(--q-lime);
+  --q-control-border: var(--q-outline-dark);
+  --q-success: var(--q-success-dark);
+  --q-info: var(--q-info-dark);
+  --q-warning: var(--q-warning-dark);
+  --q-danger: var(--q-danger-dark);
+}
+/* Tema claro: verde acessivel para TEXTO */
+[data-theme="light"], .theme-light {
+  color-scheme: light;
+  --q-bg: var(--q-light-bg);
+  --q-bg-elevated: var(--q-paper);
+  --q-fg: var(--q-light-ink);
+  --q-fg-muted: var(--q-light-muted);
+  --q-link: var(--q-lime-ink-light);
+  --q-success: var(--q-success-light);
+  --q-info: var(--q-info-light);
+  --q-warning: var(--q-warning-light);
+  --q-danger: var(--q-danger-light);
+}
+.q-page { background: var(--q-bg); color: var(--q-fg); }
+.q-card { background: var(--q-bg-elevated); color: var(--q-fg); border-radius: var(--q-radius); }
+.q-link { color: var(--q-link); text-underline-offset: .18em; }
+.q-button-primary { background: var(--q-lime); color: var(--q-light-ink); font-weight: 700; border: 2px solid transparent; border-radius: 999px; }
+.q-button-primary:focus-visible { outline: 3px solid var(--q-outline-dark); outline-offset: 3px; }
