@@ -1,3 +1,4 @@
+import { samples, metrics, formatMetric } from './assets/experience-data.js';
 import { site, contact, services, products, projects, process, media } from './content.mjs';
 
 const escape = value => String(value).replace(/[&<>"']/g, char => ({
@@ -52,23 +53,82 @@ const close = () => `<section class="close"><div class="wrap close-inner">
 
 const icon = path => `<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${path}"/></svg>`;
 
-const flow = [
-  ['Orçamento', 'Você conta o que precisa. A proposta define escopo, investimento e prazo.', 'M13 6h16l7 7v29H13z M29 6v8h7 M19 22h11 M19 29h11 M19 35h7'],
-  ['Design', 'Você revisa o visual, a organização das páginas e o conteúdo principal.', 'M7 11h34v26H7z M7 18h34 M13 14h.1 M17 14h.1 M12 24h10v8H12z M27 25h8 M27 30h8'],
-  ['Desenvolvimento', 'Construímos o site e testamos navegação, formulários e experiência no celular.', 'm17 14-10 10 10 10 m14-20 10 10-10 10 M27 10 21 38'],
-  ['Entrega', 'Após sua aprovação, publicamos no seu domínio e orientamos a entrega dos acessos.', 'M10 23v16h28V23 M24 32V8 m-9 9 9-9 9 9'],
+const roadmap = [
+  {
+    title: 'Diagnóstico', summary: 'Objetivos, público e prioridades',
+    description: 'Entendemos a operação e o que o projeto precisa resolver. O diagnóstico orienta o orçamento e ajuda a definir quais entregas fazem sentido para o seu momento.',
+    deliverable: 'Escopo, proposta e critérios de entrega',
+    participation: 'Você apresenta o contexto e valida o escopo.',
+    icon: 'M30 20a10 10 0 1 0-20 0 10 10 0 0 0 20 0z M28 28l10 10',
+  },
+  {
+    title: 'Design e arquitetura', summary: 'Navegação, visual e estrutura',
+    description: 'Planejamos o caminho de quem usa o site e organizamos conteúdo, páginas e componentes. A estrutura técnica acompanha as necessidades identificadas no diagnóstico.',
+    deliverable: 'Mapa de páginas e direção visual',
+    participation: 'Você revisa o visual e a navegação.',
+    icon: 'M7 11h34v26H7z M7 18h34 M13 14h.1 M17 14h.1 M12 24h10v8H12z M27 25h8 M27 30h8',
+  },
+  {
+    title: 'Código e segurança', summary: 'Implementação, proteção e testes',
+    description: 'Construímos a interface, integramos os recursos contratados e testamos os fluxos principais. Os cuidados de segurança são definidos conforme a exposição e os dados do projeto.',
+    deliverable: 'Versão navegável e validação dos fluxos',
+    participation: 'Você experimenta a prévia antes de aprovar a publicação.',
+    icon: 'm17 14-10 10 10 10 m14-20 10 10-10 10 M27 10 21 38',
+  },
+  {
+    title: 'Publicação e escala', summary: 'Site no ar e próximos passos',
+    description: 'Publicamos no domínio combinado, conferimos os acessos e orientamos a entrega. Com o site em uso, os dados ajudam a identificar quais melhorias merecem prioridade.',
+    deliverable: 'Publicação, acessos e orientações de evolução',
+    participation: 'Você aprova a entrega e recebe as orientações de uso.',
+    icon: 'M10 23v16h28V23 M24 32V8 m-9 9 9-9 9 9',
+  },
 ];
 
 const flowSection = `
 <section class="holo-section tinted"><div class="wrap section">
-  ${sectionTitle('Como trabalhamos', 'Do orçamento ao site no ar.', 'Veja o que acontece em cada etapa e onde você participa.')}
-  <ol class="holo-flow" data-holo aria-label="Etapas do projeto">
-  ${flow.map(([title, description, path]) => `
-    <li class="holo-step"><span class="holo-icon">${icon(path)}</span>
-      <h3>${title}</h3><p>${description}</p>
-    </li>`).join('')}
-  </ol>
+  ${sectionTitle('Como trabalhamos', 'Do diagnóstico ao site no ar.', 'Explore as etapas para ver o que entregamos e onde você participa.')}
+  <div class="roadmap holo-benefits" data-holo data-roadmap>
+    <div class="roadmap-track" role="group" aria-label="Escolher etapa do projeto">
+      ${roadmap.map((step, index) => `<button type="button" disabled aria-controls="roadmap-${index}" aria-pressed="${index === 0}">
+        <span class="holo-icon">${icon(step.icon)}</span><span><strong>${step.title}</strong><small>${step.summary}</small></span>
+        <span class="roadmap-arrow" aria-hidden="true">↗</span></button>`).join('')}
+    </div>
+    <div class="roadmap-panels">
+      ${roadmap.map((step, index) => `<article class="glass roadmap-detail" id="roadmap-${index}"${index ? ' hidden' : ''}>
+        <span class="holo-icon">${icon(step.icon)}</span>
+        <h3>${step.title}</h3><p>${step.description}</p>
+        <dl><div><dt>O que você recebe</dt><dd>${step.deliverable}</dd></div>
+        <div><dt>Sua participação</dt><dd>${step.participation}</dd></div></dl>
+      </article>`).join('')}
+      <noscript><p>Próximas etapas: design e arquitetura, código e segurança, publicação e escala.</p></noscript>
+    </div>
+  </div>
 </div></section>`;
+
+const initialSample = samples[0];
+const metricsSection = `
+<section class="wrap section holo-section">
+  ${sectionTitle('Indicadores de software', 'Dados que ajudam a decidir.', 'Veja como um painel pode acompanhar o volume de uso e a saúde de um sistema ao longo do tempo.')}
+  <div class="glass metrics-panel" data-metrics>
+    <div class="metrics-header">
+      <div><p class="label">Dados simulados</p><h3>Visão da operação</h3></div>
+      <div class="metric-periods" role="group" aria-label="Período da simulação">
+        ${samples.map((sample, i) => `<button type="button" disabled aria-pressed="${i === 0}">${sample.period}</button>`).join('')}
+      </div>
+    </div>
+    <p class="metrics-note">Exemplo de painel. Os valores são fictícios e não medem o desempenho da Qalyon ou do Atlas.</p>
+    <dl class="metrics-grid">
+      ${metrics(initialSample).map(item => `<div><dt>${item.label}</dt><dd><span data-counter>${formatMetric(item)}</span></dd></div>`).join('')}
+    </dl>
+    <figure class="metrics-chart">
+      <figcaption>Eventos por intervalo <span data-chart-period>· ${initialSample.period}</span></figcaption>
+      <ol class="chart-columns" data-chart aria-label="Eventos em cada intervalo">
+        ${initialSample.events.map((value, index) => `<li><span>${value}</span><meter min="0" max="${Math.max(...initialSample.events)}" value="${value}" aria-hidden="true"></meter><small>Dia ${index + 1}</small></li>`).join('')}
+      </ol>
+    </figure>
+    <p class="sr-only" data-metrics-status role="status"></p>
+  </div>
+</section>`;
 
 const benefitsSection = `
 <section class="wrap section holo-section">
@@ -109,6 +169,7 @@ const home = `
   ${projectCards(projects.slice(0, 2))}${link('/projetos/', 'Explorar o mostruário')}</div></section>
 <section class="wrap section">${sectionTitle('Produtos próprios', 'Software para processos do dia a dia.')}${productCards()}</section>
 ${flowSection}
+${metricsSection}
 ${benefitsSection}
 ${close()}`;
 
@@ -242,6 +303,7 @@ export function layout(page, origin, isPreview) {
   <link rel="icon" href="/assets/favicon.png"><link rel="stylesheet" href="/assets/tokens.css">
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="module" src="/assets/motion.js"></script>
+  ${page.path === '/' ? '<script type="module" src="/assets/experience.js"></script>' : ''}
   ${page.script ? `<script src="${page.script}" defer></script>` : ''}
 </head>
 <body>
