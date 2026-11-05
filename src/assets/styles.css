@@ -86,7 +86,28 @@ nav [aria-current] { text-decoration: underline; text-underline-offset: 6px; }
 .service-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 1050px) { .service-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .service-list { grid-template-columns: 1fr; } }
-.service-list article { display: flex; flex-direction: column; align-items: flex-start; border-top: 1px solid var(--q-outline-dark); padding: 20px 18px 0 0; }
+.service-list article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 18px 10px;
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  background-color: transparent;
+  transition: background-color .24s ease, border-color .24s ease, box-shadow .24s ease;
+}
+.service-list article:focus-within {
+  background-color: var(--q-graphite);
+  border-color: color-mix(in srgb, var(--q-lime) 30%, var(--divider));
+  box-shadow: 0 6px 18px #0002;
+}
+@media (hover: hover) {
+  .service-list article:hover {
+    background-color: var(--q-graphite);
+    border-color: color-mix(in srgb, var(--q-lime) 30%, var(--divider));
+    box-shadow: 0 6px 18px #0002;
+  }
+}
 .service-list p, .card p:not(.label), .atlas-card p:not(.label), .steps p, .demo p:not(.label) { color: var(--q-text-secondary-dark); margin-top: 12px; }
 .service-list .arrow-link { margin-top: auto; padding-top: 12px; }
 .card { border: 1px solid var(--divider); border-radius: 8px; overflow: hidden; background: var(--q-night); }
@@ -244,8 +265,8 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
 .service-list > :nth-child(2), .cards > :nth-child(2), .steps > :nth-child(2) { animation-delay: .08s; }
 .service-list > :nth-child(3), .cards > :nth-child(3), .steps > :nth-child(3) { animation-delay: .16s; }
 .steps > :nth-child(n+4) { animation-delay: .24s; }
-.service-list article, .steps li { transition: border-color .22s, box-shadow .22s; }
-.service-list article:hover, .service-list article:focus-within, .steps li:hover {
+.steps li { transition: border-color .22s, box-shadow .22s; }
+.steps li:hover {
   border-color: var(--q-lime);
   box-shadow: 0 -10px 18px -15px var(--q-lime);
 }
