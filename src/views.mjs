@@ -238,6 +238,7 @@ if (whatsapp !== null && !/^55[1-9]\d{9,10}$/.test(whatsapp)) {
   throw new Error('Informe o número oficial brasileiro em formato internacional.');
 }
 const whatsappUrl = whatsapp ? 'https://wa.me/' + whatsapp : '';
+const emailUrl = 'mailto:' + contact.email;
 
 const contactPage = `
 <section class="quote-intro"><div class="wrap page-intro">
@@ -251,6 +252,7 @@ const contactPage = `
       <h2>Prefere conversar?</h2>
       <p>Comece pelo WhatsApp e conte sua ideia no seu ritmo.</p>
       ${whatsappUrl ? link(whatsappUrl, 'Conversar no WhatsApp', true) : '<p class="quote-channel-status">O WhatsApp será liberado após a configuração do número comercial.</p>'}
+      ${link(emailUrl, 'Enviar e-mail')}
     </div>
     <div class="quote-next">
       <h2>Como o orçamento é preparado</h2>
@@ -267,7 +269,7 @@ const contactPage = `
       <span class="quote-tag">Orçamento sob medida</span>
     </div>
     <p id="form-status">Preencha os campos obrigatórios. Se ainda estiver definindo o projeto, deixe os detalhes opcionais em branco.</p>
-    <form id="quote-form" data-whatsapp-url="${whatsappUrl}" aria-describedby="form-status">
+    <form id="quote-form" data-whatsapp-url="${whatsappUrl}" data-email-url="${emailUrl}" aria-describedby="form-status">
       <fieldset>
         <legend>Seus dados</legend>
         <div class="quote-fields">
@@ -310,11 +312,12 @@ const contactPage = `
     </form>
     <dialog class="quote-dialog" id="quote-dialog" aria-labelledby="quote-dialog-title">
       <h2 id="quote-dialog-title">Confira seu briefing</h2>
-      <p>${whatsappUrl ? 'Você pode copiar o resumo ou abrir o WhatsApp com a mensagem preenchida. O envio acontece na conversa.' : 'O resumo fica no seu navegador. Você pode copiá-lo para compartilhar quando quiser.'}</p>
+      <p>${whatsappUrl ? 'Copie o resumo ou abra o WhatsApp ou seu aplicativo de e-mail com a mensagem preenchida. Revise e envie pelo canal escolhido.' : 'O resumo fica no seu navegador. Você pode copiá-lo para compartilhar quando quiser.'}</p>
       <label for="quote-summary">Resumo do projeto</label>
       <textarea id="quote-summary" rows="9" readonly></textarea>
       <div class="quote-dialog-actions">
         ${whatsappUrl ? '<a class="button" id="quote-send">Abrir briefing no WhatsApp</a>' : ''}
+        <a class="button quote-secondary" id="quote-email">Abrir briefing no e-mail</a>
         <button class="button quote-secondary" id="quote-copy" type="button">Copiar briefing</button>
         <button class="button quote-secondary" id="quote-close" type="button">Voltar ao formulário</button>
       </div>
@@ -327,7 +330,7 @@ const privacyPage = `
 ${pageIntro('Privacidade', 'Aviso de privacidade da prévia.',
   'Este aviso descreve como funciona a versão restrita do site institucional da Qalyon.')}
 <section class="wrap section compact prose body-copy">
-  <h2>Campos de orçamento</h2><p>O briefing é montado no navegador. O site não guarda os valores digitados. Se você abrir o briefing no WhatsApp, o texto será encaminhado ao serviço para preencher a conversa. Você decide quando enviar a mensagem.</p>
+  <h2>Campos de orçamento</h2><p>O briefing é montado no navegador. O site não guarda os valores digitados. Se você abrir o briefing no WhatsApp, o texto será encaminhado ao serviço para preencher a conversa. Se escolher o e-mail, seu aplicativo abrirá um rascunho com o resumo. Você decide quando enviar a mensagem.</p>
   <h2>Cookies e infraestrutura</h2><p>A aplicação não instala cookies próprios de rastreamento e não inclui pixels de publicidade ou ferramentas de análise de comportamento. A plataforma de hospedagem e de acesso pode tratar dados técnicos para autenticação, funcionamento e segurança.</p>
   <h2>Atendimento comercial</h2><p>Antes de ativar o recebimento de solicitações, este aviso será atualizado com a identificação do responsável pelo tratamento, canal de privacidade e detalhes sobre uso, retenção e acesso aos dados recebidos.</p>
   ${link('/contato/', 'Voltar para contato')}</section>`;

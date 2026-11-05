@@ -5,6 +5,7 @@ const dialog = document.querySelector('#quote-dialog');
 const summary = document.querySelector('#quote-summary');
 const status = document.querySelector('#quote-copy-status');
 const send = document.querySelector('#quote-send');
+const email = document.querySelector('#quote-email');
 const review = document.querySelector('#quote-review');
 
 if ([...service.options].some(option => option.value === requested)) {
@@ -54,6 +55,9 @@ form.addEventListener('submit', event => {
     url.searchParams.set('text', summary.value);
     send.href = url.href;
   }
+  const subject = encodeURIComponent('Solicitação de orçamento — Qalyon');
+  const body = encodeURIComponent(summary.value.replace(/\n/g, '\r\n'));
+  email.href = form.dataset.emailUrl + '?subject=' + subject + '&body=' + body;
   dialog.showModal();
 });
 

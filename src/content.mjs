@@ -9,7 +9,8 @@ export const site = {
 };
 
 export const contact = {
-  whatsappBusiness: null, // Número oficial confirmado, no formato internacional, sem pontuação.
+  whatsappBusiness: '5561995079235',
+  email: 'qalyontecnologia@gmail.com',
   // A integração de recebimento exige implementação e homologação separadas.
 };
 

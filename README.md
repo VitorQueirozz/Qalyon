@@ -40,8 +40,8 @@ Para preparar os arquivos de produção após a aprovação de lançamento, conf
 
 ## Dependências de lançamento
 
-1. Confirmar o número oficial de WhatsApp Business e preencher `contact.whatsappBusiness` em formato internacional. Verificar o destino antes de habilitar o link.
-2. O formulário prepara um briefing local para revisão e cópia. Com o número comercial configurado, a página oferece conversa direta e abertura do briefing no WhatsApp. Para recebimento direto pelo site, integrar um serviço de envio e implementar validação no servidor, proteção contra abuso e acesso restrito aos contatos.
+1. Para trocar os canais comerciais, atualizar `contact.whatsappBusiness` em formato internacional e `contact.email` em `src/content.mjs`.
+2. O formulário prepara um briefing local para revisão e cópia. A página oferece conversa direta e abre o briefing no WhatsApp ou como rascunho no aplicativo de e-mail. Para recebimento direto pelo site, integrar um serviço de envio e implementar validação no servidor, proteção contra abuso e acesso restrito aos contatos.
 3. Atualizar o aviso de privacidade conforme o fluxo real, com identificação do responsável, canal de privacidade, finalidade, acesso e retenção.
 4. Confirmar domínio, política de acesso e ambiente de produção. Medir Core Web Vitals de campo quando o domínio tiver tráfego suficiente. A URL do Atlas só deve ser inserida quando houver um destino que corresponda ao recurso oferecido.
 5. Substituir o raster apenas quando houver versão vetorial oficial aprovada.
