@@ -18,9 +18,17 @@ export const services = [
   {
     slug: 'sites-institucionais', title: 'Sites institucionais',
     summary: 'Apresente sua empresa, seus serviços e seus canais de contato em um endereço próprio.',
-    audience: 'Profissionais e negócios que precisam explicar o que fazem, mostrar seu trabalho e facilitar o primeiro contato.',
-    includes: ['Páginas sobre a empresa, soluções e contato', 'Navegação responsiva e estrutura para busca', 'Portfólio profissional, quando fizer parte do escopo', 'Publicação no domínio e na hospedagem do cliente'],
-    extra: 'Um portfólio profissional pode ser a parte principal do site ou uma seção dele. A proposta considera a quantidade de projetos, o material disponível e como você quer apresentar cada trabalho.',
+    audience: 'Empresas e escritórios que precisam apresentar a marca, explicar seus serviços e centralizar os canais de atendimento.',
+    includes: ['Páginas sobre a empresa, soluções e contato', 'Navegação responsiva e estrutura para busca', 'Publicação no domínio e na hospedagem do cliente'],
+    extra: 'O escopo é definido pela quantidade de páginas, pelo conteúdo da empresa e pelos canais de atendimento que precisam estar disponíveis no site.',
+    image: 'presence',
+  },
+  {
+    slug: 'portfolio-profissional', title: 'Portfólios profissionais',
+    summary: 'Mostre seus melhores trabalhos, explique sua atuação e facilite o contato de quem quer contratar você.',
+    audience: 'Profissionais autônomos e estúdios que querem mostrar seu trabalho com exemplos, como arquitetos, designers, fotógrafos e prestadores de serviços especializados.',
+    includes: ['Apresentação profissional e especialidades', 'Galeria ou páginas de projetos com contexto e imagens', 'Área para serviços e canais de contato', 'Layout adaptado ao tipo de trabalho e aos dispositivos'],
+    extra: 'A proposta considera quantos trabalhos serão apresentados, os materiais disponíveis e como você quer contar a história de cada projeto.',
     image: 'presence',
   },
   {
@@ -58,7 +66,7 @@ export const projects = [
   {
     slug: 'portfolio-de-arquitetura', title: 'Portfólio de arquitetura', kind: 'Demonstração',
     summary: 'Uma presença digital para apresentar serviços, projetos e a forma de trabalho de um estúdio independente.',
-    image: 'presence', service: 'sites-institucionais',
+    image: 'presence', service: 'portfolio-profissional',
     exampleTitle: 'Espaços para viver melhor.',
     exampleText: 'Uma apresentação conceitual de um estúdio de arquitetura, com destaque para projetos residenciais e o processo de projeto.',
     sections: ['Projetos residenciais', 'Projetos comerciais', 'Etapas do projeto'],

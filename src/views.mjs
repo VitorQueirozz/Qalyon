@@ -175,7 +175,7 @@ ${close()}`;
 
 const servicesPage = `
 ${pageIntro('Serviços digitais', 'Desenvolvimento sob medida para o seu negócio.',
-  'Sites institucionais, landing pages e sistemas web. Portfólios profissionais fazem parte da oferta de sites.', quote())}
+  'Apresente sua empresa com um site institucional, mostre seus trabalhos com um portfólio, divulgue uma oferta com uma landing page ou organize sua operação com um sistema web.', quote())}
 <section class="wrap section compact">${sectionTitle('Catálogo', 'Escolha pelo que você precisa resolver.')}${serviceList()}</section>
 <section class="tinted"><div class="wrap section split"><div>${sectionTitle('Condições comerciais', 'Um projeto por vez, com escopo claro.')}</div>
 <div class="body-copy"><p>Os serviços são contratados como projetos avulsos, com preço sob consulta. A proposta descreve escopo, entregas, prazos e condições de pagamento.</p>
@@ -188,7 +188,8 @@ ${pageIntro('Serviços digitais', service.title, service.summary, quote(service.
   <div class="body-copy"><h2>Para quem serve</h2><p>${service.audience}</p><h2>O que pode incluir</h2>
   <ul class="feature-list">${service.includes.map(item => `<li>${item}</li>`).join('')}</ul>
   <p>${service.extra}</p>
-  ${service.slug === 'sites-institucionais' ? '<p id="portfolio-profissional"><strong>Portfólio profissional.</strong> Apresente trabalhos, especialidades e seu processo em um site próprio. Essa opção integra a oferta de sites e é orçada conforme o escopo.</p>' + quote('portfolio-profissional') : ''}
+  ${service.slug === 'sites-institucionais' ? '<p id="portfolio-profissional">Seu objetivo principal é apresentar trabalhos e especialidades? ' + link('/servicos/portfolio-profissional/', 'Conhecer portfólios profissionais') + '</p>' : ''}
+  ${service.slug === 'portfolio-profissional' ? link('/projetos/portfolio-de-arquitetura/', 'Ver exemplo de portfólio') : ''}
   </div>${picture(service.image)}</section>
 <section class="tinted"><div class="wrap section split">
   <div>${sectionTitle('Orçamento', 'Vamos entender o que você precisa.')}</div>
@@ -284,7 +285,6 @@ const contactPage = `
           <div><label for="service">Serviço de interesse</label><select id="service" name="service" required>
             <option value="">Selecione uma opção</option>
             ${services.map(service => `<option value="${service.slug}">${service.title}</option>`).join('')}
-            <option value="portfolio-profissional">Portfólio profissional</option>
             <option value="a-definir">Ainda preciso definir</option>
           </select></div>
           <div><label for="stage">Momento do projeto <small>Opcional</small></label><select id="stage" name="stage">
