@@ -605,3 +605,18 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
   .showcase-grid, .showcase-card:first-child { grid-template-columns: 1fr; }
   .preview-landing-body, .preview-system-body { padding: 14px; }
 }
+
+.showcase-card:nth-child(4) { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+.showcase-card:nth-child(4) .project-preview { aspect-ratio: auto; min-height: 200px; }
+.preview-institutional { background: #30284f; }
+.preview-institutional .preview-browser { background: #211b44; color: #fcf4df; }
+.preview-institutional-body { display: grid; grid-template-columns: 1.05fr 1fr; min-width: 0; align-items: center; }
+.preview-institutional-body > div { display: grid; gap: 7px; padding: clamp(9px, 1.5vw, 16px); }
+.preview-institutional-body span { font: clamp(.5rem, .85vw, .65rem) var(--mono); letter-spacing: .045em; color: #ddd1aa; }
+.preview-institutional-body strong { font: 700 clamp(.95rem, 2vw, 1.7rem)/1.1 Georgia, serif; }
+.preview-institutional-body small { width: fit-content; padding: 2px 5px; color: #211b44; background: #e9dba8; font-size: clamp(.51rem, .8vw, .67rem); }
+.preview-institutional-body img { width: 100%; height: 100%; min-height: 105px; object-fit: cover; }
+@media (max-width: 620px) {
+  .showcase-card:nth-child(4) { grid-template-columns: 1fr; }
+  .showcase-card:nth-child(4) .project-preview { min-height: 0; aspect-ratio: 16 / 10; }
+}

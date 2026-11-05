@@ -26,6 +26,17 @@ const serviceList = () => `<div class="service-list">${services.map(service => `
   <p>${service.summary}</p>${link(servicePath(service), 'Conhecer ' + service.title.toLowerCase())}</article>`).join('')}</div>`;
 
 const projectPreview = project => {
+  if (project.service === 'sites-institucionais') {
+    return `<div class="project-preview preview-institutional" aria-hidden="true">
+      <div class="preview-browser">
+        <div class="preview-browser-bar"><i></i><i></i><i></i></div>
+        <div class="preview-institutional-body">
+          <div><span>ALMEIDA TORRES</span><strong>O Direito em perspectiva.</strong><small>Áreas de atuação ↗</small></div>
+          <img src="/assets/almeida-torres.webp" alt="" width="600" height="343" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>`;
+  }
   if (project.service === 'landing-pages') {
     return `<div class="project-preview preview-landing" aria-hidden="true">
       <div class="preview-browser">
@@ -198,8 +209,8 @@ const home = `
   'Desenvolvimento para profissionais autônomos, pequenos negócios e equipes com necessidades próprias.')}
   ${serviceList()}</section>
 <section class="tinted showcase-section"><div class="wrap section">
-  <div class="showcase-heading"><div>${sectionTitle('Mostruário', 'Da apresentação à operação.',
-  'Um portfólio para mostrar trabalhos, uma página para apresentar uma oferta e um painel para acompanhar serviços.')}</div>
+  <div class="showcase-heading"><div>${sectionTitle('Mostruário', 'Veja como uma ideia ganha forma.',
+  'Demonstrações autorais para explorar soluções, conteúdo e navegação em diferentes contextos.')}</div>
   ${link('/projetos/', 'Explorar o mostruário')}</div>
   ${projectCards()}</div></section>
 <section class="wrap section">${sectionTitle('Produtos próprios', 'Software para processos do dia a dia.')}${productCards()}</section>
@@ -255,7 +266,7 @@ ${pageIntro('Mostruário / ' + project.kind, project.title, project.summary)}
   <p class="label">${project.kind === 'Demonstração' ? 'Amostra visual / cenário fictício' : 'Apresentação do projeto'}</p><div class="split">
   <div><h2>${project.exampleTitle}</h2><p>${project.exampleText}</p></div>${projectPreview(project)}</div>
   <ol class="demo-items">${project.sections.map(item => `<li>${item}</li>`).join('')}</ol></div>
-  <div class="actions">${link('/projetos/', 'Voltar ao mostruário')}${quote(project.service)}</div></section>`;
+  <div class="actions">${project.demoUrl ? link(project.demoUrl, 'Abrir site demonstrativo (prévia privada)') : ''}${link('/projetos/', 'Voltar ao mostruário')}${quote(project.service)}</div></section>`;
 
 const aboutPage = `
 ${pageIntro('Sobre a Qalyon', 'Tecnologia com propósito e precisão.',

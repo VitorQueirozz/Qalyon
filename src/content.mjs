@@ -90,6 +90,16 @@ export const projects = [
     exampleText: 'Amostra de organização de tarefas por etapa, com registros fictícios e estrutura adaptada para telas pequenas.',
     sections: ['Aguardando agendamento', 'Em execução', 'Concluído'],
   },
+  {
+    slug: 'almeida-torres', title: 'Almeida Torres Advocacia', kind: 'Demonstração',
+    category: 'Site institucional',
+    summary: 'Um site institucional para um escritório fictício, com páginas sobre a equipe, as áreas de atuação e o atendimento.',
+    service: 'sites-institucionais',
+    demoUrl: 'https://portfolio-almeida-torres.cloudybrioche.chatgpt.site',
+    exampleTitle: 'O Direito em perspectiva.',
+    exampleText: 'A estrutura dá a cada área de atuação um lugar próprio e ajuda o visitante a entender quem atende, como funciona o primeiro contato e quais conteúdos consultar.',
+    sections: ['Escritório e equipe', 'Áreas de atuação', 'Conteúdos e atendimento'],
+  },
 ];
 
 export const process = [
