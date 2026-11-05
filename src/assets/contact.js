@@ -20,7 +20,6 @@ const fields = [
   ['stage', 'Momento do projeto'],
   ['goal', 'Objetivo'],
   ['deadline', 'Prazo desejado'],
-  ['budget', 'Orçamento previsto'],
   ['reference', 'Site ou referência'],
 ];
 

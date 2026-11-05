@@ -300,8 +300,7 @@ const contactPage = `
           <div><label for="deadline">Prazo desejado <small>Opcional</small></label><select id="deadline" name="deadline">
             <option value="">Sem prazo definido</option><option>Em até 30 dias</option><option>Entre 1 e 2 meses</option><option>Mais de 2 meses</option>
           </select></div>
-          <div><label for="budget">Orçamento previsto <small>Opcional</small></label><input id="budget" name="budget" maxlength="70" placeholder="Ex.: até R$ 3.000"></div>
-          <div class="quote-wide"><label for="reference">Site atual ou referência <small>Opcional</small></label><input id="reference" name="reference" type="url" maxlength="220" placeholder="https://"></div>
+          <div><label for="reference">Site atual ou referência <small>Opcional</small></label><input id="reference" name="reference" type="url" maxlength="220" placeholder="https://"></div>
         </div>
       </fieldset>
       <div class="quote-submit">
