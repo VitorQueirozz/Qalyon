@@ -15,7 +15,7 @@ export const contact = {
 
 export const services = [
   {
-    slug: 'sites-institucionais', title: 'Sites institucionais', number: '01',
+    slug: 'sites-institucionais', title: 'Sites institucionais',
     summary: 'Apresente sua empresa, seus serviços e seus canais de contato em um endereço próprio.',
     audience: 'Profissionais e negócios que precisam explicar o que fazem, mostrar seu trabalho e facilitar o primeiro contato.',
     includes: ['Páginas sobre a empresa, soluções e contato', 'Navegação responsiva e estrutura para busca', 'Portfólio profissional, quando fizer parte do escopo', 'Publicação no domínio e na hospedagem do cliente'],
@@ -23,7 +23,7 @@ export const services = [
     image: 'presence',
   },
   {
-    slug: 'landing-pages', title: 'Landing pages', number: '02',
+    slug: 'landing-pages', title: 'Landing pages',
     summary: 'Apresente uma oferta, um serviço ou uma campanha e guie o visitante até uma ação.',
     audience: 'Autônomos e negócios com uma oferta definida que precisam de uma página focada em contato ou orçamento.',
     includes: ['Estrutura de conteúdo para uma oferta específica', 'Seções com benefícios, perguntas e próximos passos', 'CTA para um canal confirmado', 'Versão mobile e publicação no ambiente do cliente'],
@@ -31,7 +31,7 @@ export const services = [
     image: 'presence',
   },
   {
-    slug: 'sistemas-web', title: 'Sistemas web sob medida', number: '03',
+    slug: 'sistemas-web', title: 'Sistemas web sob medida',
     summary: 'Organize processos e reúna dados da operação em um sistema adaptado ao seu negócio.',
     audience: 'Equipes que precisam reduzir retrabalho, substituir controles dispersos ou conectar ferramentas.',
     includes: ['Mapeamento de etapas, usuários e permissões', 'Painéis, cadastros ou fluxos operacionais conforme o escopo', 'Integrações avaliadas caso a caso', 'Testes, publicação e orientação de entrega'],

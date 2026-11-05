@@ -21,7 +21,7 @@ const picture = (key, extra = '') => `<img class="photo ${extra}" src="/assets/$
   alt="${escape(media[key])}" loading="lazy" decoding="async">`;
 
 const serviceList = () => `<div class="service-list">${services.map(service => `
-  <article><span class="label">${service.number} /</span><h3>${service.title}</h3>
+  <article><h3>${service.title}</h3>
   <p>${service.summary}</p>${link(servicePath(service), 'Conhecer ' + service.title.toLowerCase())}</article>`).join('')}</div>`;
 
 const projectCards = (items = projects) => `<div class="cards">${items.map(project => `
@@ -34,8 +34,8 @@ const productCards = () => `<div class="product-list">${products.map(product => 
   <h3>${product.title}<span> by Qalyon</span></h3><p>${product.summary}</p></div>
   ${link(productPath(product), 'Conhecer ' + product.title)}</article>`).join('')}</div>`;
 
-const steps = items => `<ol class="steps">${items.map(([title, description], index) => `
-  <li><span class="label">${String(index + 1).padStart(2, '0')}</span>
+const steps = items => `<ol class="steps">${items.map(([title, description]) => `
+  <li>
   <h3>${title}</h3><p>${description}</p></li>`).join('')}</ol>`;
 
 const pageIntro = (label, title, description, actions = '') => `
@@ -50,6 +50,39 @@ const close = () => `<section class="close"><div class="wrap close-inner">
   <p>Conte seu objetivo em poucas linhas. O escopo e o orçamento são definidos depois da primeira conversa.</p></div>
   ${quote()}</div></section>`;
 
+const icon = path => `<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${path}"/></svg>`;
+
+const flow = [
+  ['Orçamento', 'Você conta o que precisa. A proposta define escopo, investimento e prazo.', 'M13 6h16l7 7v29H13z M29 6v8h7 M19 22h11 M19 29h11 M19 35h7'],
+  ['Design', 'Você revisa o visual, a organização das páginas e o conteúdo principal.', 'M7 11h34v26H7z M7 18h34 M13 14h.1 M17 14h.1 M12 24h10v8H12z M27 25h8 M27 30h8'],
+  ['Desenvolvimento', 'Construímos o site e testamos navegação, formulários e experiência no celular.', 'm17 14-10 10 10 10 m14-20 10 10-10 10 M27 10 21 38'],
+  ['Entrega', 'Após sua aprovação, publicamos no seu domínio e orientamos a entrega dos acessos.', 'M10 23v16h28V23 M24 32V8 m-9 9 9-9 9 9'],
+];
+
+const flowSection = `
+<section class="holo-section tinted"><div class="wrap section">
+  ${sectionTitle('Como trabalhamos', 'Do orçamento ao site no ar.', 'Veja o que acontece em cada etapa e onde você participa.')}
+  <ol class="holo-flow" data-holo aria-label="Etapas do projeto">
+  ${flow.map(([title, description, path]) => `
+    <li class="holo-step"><span class="holo-icon">${icon(path)}</span>
+      <h3>${title}</h3><p>${description}</p>
+    </li>`).join('')}
+  </ol>
+</div></section>`;
+
+const benefitsSection = `
+<section class="wrap section holo-section">
+  ${sectionTitle('Presença digital', 'O que seu site facilita na prática.', 'Dê ao cliente um lugar para conhecer seu trabalho e decidir como falar com você.')}
+  <div class="holo-benefits" data-holo>
+    <div class="holo-hub"><span class="holo-icon">${icon('M6 10h36v28H6z M6 17h36 M12 13h.1 M16 13h.1 M22 23h13 M22 29h10 M12 23h5v9h-5z')}</span><p>Seu site</p></div>
+    <ul class="holo-branches">
+      <li><span class="holo-icon">${icon('M30 20a10 10 0 1 0-20 0 10 10 0 0 0 20 0z M28 28l10 10')}</span><div><h3>Ser encontrado</h3><p>Tenha um endereço próprio para compartilhar nas redes e facilitar a descoberta pelos buscadores.</p></div></li>
+      <li><span class="holo-icon">${icon('M8 12h32v25H8z M17 12V8h14v4 M8 23h32 M21 23v4h6v-4')}</span><div><h3>Mostrar seu trabalho</h3><p>Reúna serviços, exemplos e respostas às dúvidas que surgem antes da contratação.</p></div></li>
+      <li><span class="holo-icon">${icon('M7 10h34v24H20l-9 6v-6H7z M14 19h20 M14 25h15')}</span><div><h3>Facilitar o contato</h3><p>Deixe claro como pedir um orçamento, agendar uma conversa ou chamar no seu canal de atendimento.</p></div></li>
+    </ul>
+  </div>
+</section>`;
+
 const home = `
 <section class="hero-stage">
 <div class="neural-scene" aria-hidden="true">
@@ -61,21 +94,22 @@ const home = `
   <div class="actions">${quote()}${link('/servicos/', 'Explorar serviços')}</div></div>
   <aside class="hero-index" aria-label="Frentes da Qalyon">
     <p class="label"><span class="dot"></span> Qalyon / duas frentes</p>
-    <a href="/produtos/"><span class="index-number">01</span><span><strong>Produtos próprios</strong><small>Atlas, nosso primeiro SaaS</small></span><span aria-hidden="true">↗</span></a>
-    <a href="/servicos/"><span class="index-number">02</span><span><strong>Serviços digitais</strong><small>Da presença digital à operação</small></span><span aria-hidden="true">↗</span></a>
+    <a href="/produtos/"><span><strong>Produtos próprios</strong><small>Atlas, nosso primeiro SaaS</small></span><span aria-hidden="true">↗</span></a>
+    <a href="/servicos/"><span><strong>Serviços digitais</strong><small>Da presença digital à operação</small></span><span aria-hidden="true">↗</span></a>
   </aside>
   <button type="button" class="motion-toggle" id="motion-toggle" hidden>Pausar movimento</button>
 </div>
 </section>
 <section class="band"><div class="wrap band-inner"><span>Estratégia, design e código</span><span>Projetos avulsos</span><span>Propostas sob consulta</span></div></section>
-<section class="wrap section">${sectionTitle('01 / Serviços digitais', 'O projeto certo para o seu objetivo.',
+<section class="wrap section">${sectionTitle('Serviços digitais', 'O projeto certo para o seu objetivo.',
   'Desenvolvimento para profissionais autônomos, pequenos negócios e equipes com necessidades próprias.')}
   ${serviceList()}</section>
-<section class="tinted"><div class="wrap section">${sectionTitle('02 / Mostruário', 'Veja como uma ideia ganha forma.',
+<section class="tinted"><div class="wrap section">${sectionTitle('Mostruário', 'Veja como uma ideia ganha forma.',
   'Demonstrações autorais para explorar soluções, conteúdo e navegação em diferentes contextos.')}
   ${projectCards(projects.slice(0, 2))}${link('/projetos/', 'Explorar o mostruário')}</div></section>
-<section class="wrap section">${sectionTitle('03 / Produtos próprios', 'Software para processos do dia a dia.')}${productCards()}</section>
-<section class="tinted"><div class="wrap section">${sectionTitle('04 / Processo', 'Do primeiro contato à entrega.')}${steps(process)}</div></section>
+<section class="wrap section">${sectionTitle('Produtos próprios', 'Software para processos do dia a dia.')}${productCards()}</section>
+${flowSection}
+${benefitsSection}
 ${close()}`;
 
 const servicesPage = `
@@ -88,7 +122,7 @@ ${pageIntro('Serviços digitais', 'Desenvolvimento sob medida para o seu negóci
 ${quote()}</div></div></section>`;
 
 const servicePage = service => `
-${pageIntro('Serviços digitais / ' + service.number, service.title, service.summary, quote(service.slug))}
+${pageIntro('Serviços digitais', service.title, service.summary, quote(service.slug))}
 <section class="wrap section compact split">
   <div class="body-copy"><h2>Para quem serve</h2><p>${service.audience}</p><h2>O que pode incluir</h2>
   <ul class="feature-list">${service.includes.map(item => `<li>${item}</li>`).join('')}</ul>
@@ -123,7 +157,7 @@ ${pageIntro('Mostruário / ' + project.kind, project.title, project.summary)}
 <section class="wrap section compact"><div class="demo">
   <p class="label">${project.kind === 'Demonstração' ? 'Amostra visual / cenário fictício' : 'Apresentação do projeto'}</p><div class="split">
   <div><h2>${project.exampleTitle}</h2><p>${project.exampleText}</p></div>${picture(project.image)}</div>
-  <ol class="demo-items">${project.sections.map((item, index) => `<li><span class="label">0${index + 1}</span>${item}</li>`).join('')}</ol></div>
+  <ol class="demo-items">${project.sections.map(item => `<li>${item}</li>`).join('')}</ol></div>
   <div class="actions">${link('/projetos/', 'Voltar ao mostruário')}${quote(project.service)}</div></section>`;
 
 const aboutPage = `

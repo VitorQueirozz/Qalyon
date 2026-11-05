@@ -26,8 +26,15 @@ const reveal = new IntersectionObserver(entries => {
 }, { threshold: .12 });
 
 for (const element of document.querySelectorAll(
-  'main .section > h2, main .section > .lead, .service-list article, .card, .atlas-card, .steps li, .split > *, .contact-panel, .demo, .prose > h2, .prose > p, .close-inner',
+  'main .section > h2, main .section > .lead, .service-list article, .card, .atlas-card, .steps li, .split > *, .contact-panel, .demo, [data-holo], .prose > h2, .prose > p, .close-inner',
 )) reveal.observe(element);
+
+const holograms = new IntersectionObserver(entries => {
+  for (const { target, isIntersecting } of entries) {
+    target.classList.toggle('holo-live', isIntersecting);
+  }
+});
+for (const diagram of document.querySelectorAll('[data-holo]')) holograms.observe(diagram);
 
 function animate(now) {
   if (now - lastDraw >= 32) {

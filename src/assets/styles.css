@@ -61,10 +61,9 @@ nav [aria-current] { text-decoration: underline; text-underline-offset: 6px; }
 .hero-main h1 { color: var(--q-off-white); }
 .hero-index { padding: 25px; background: var(--q-graphite); border: 1px solid var(--divider); border-top: 2px solid var(--q-lime); border-radius: 0 0 8px 8px; }
 .hero-index .label { color: var(--q-text-secondary-dark); }
-.hero-index a { display: grid; grid-template-columns: 23px 1fr auto; gap: 12px; align-items: center; border-top: 1px solid var(--divider); padding: 18px 0; }
+.hero-index a { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; border-top: 1px solid var(--divider); padding: 18px 0; }
 .hero-index a:hover { color: var(--q-lime); }
 .hero-index small { display: block; color: var(--q-text-secondary-dark); font-size: .8rem; }
-.index-number { color: var(--q-lime); font: .75rem var(--mono); }
 .band { border-block: 1px solid var(--divider); }
 .band-inner { display: flex; flex-wrap: wrap; gap: 12px 35px; justify-content: space-between; padding-block: 16px; color: var(--q-text-secondary-dark); font: .72rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .04em; }
 .page-intro { padding-block: clamp(60px, 8vw, 110px) 35px; }
@@ -253,3 +252,73 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
 [data-motion-paused] .card, [data-motion-paused] .atlas-card,
 [data-motion-paused] .arrow-link span, [data-motion-paused] .button span,
 [data-motion-paused] .hero-index a > :last-child { transform: none; }
+
+/* Circuit diagrams are HTML and SVG, with motion gated by viewport visibility. */
+.holo-section { overflow: clip; }
+.holo-flow, .holo-benefits {
+  position: relative;
+  margin: 2.4rem 0 0;
+  padding: clamp(18px, 4vw, 48px);
+  border: 1px solid #b6f21a40;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 50% 0%, #b6f21a14, transparent 70%),
+    repeating-linear-gradient(0deg, transparent 0 23px, #b6f21a0a 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, #b6f21a0a 23px 24px),
+    #101817;
+}
+.holo-flow { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 3vw, 36px); }
+.holo-step { position: relative; }
+.holo-step h3, .holo-branches h3 { margin: 16px 0 8px; font-size: 1.15rem; }
+.holo-step p, .holo-branches p { color: var(--q-text-secondary-dark); font-size: .9rem; margin: 0; }
+.holo-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  aspect-ratio: 1;
+  color: var(--q-lime);
+  border: 1px solid #b6f21a69;
+  border-radius: 16px;
+  background: radial-gradient(circle, #263820, #111a17 75%);
+  box-shadow: inset 0 0 14px #b6f21a12, 0 0 22px #b6f21a19;
+  transition: box-shadow .35s ease, border-color .35s ease;
+}
+.holo-icon svg { width: 54%; filter: drop-shadow(0 0 5px #b6f21a70); }
+.holo-step:hover .holo-icon, .holo-branches li:hover .holo-icon { border-color: var(--q-lime); box-shadow: 0 0 28px #b6f21a40; }
+.holo-step:not(:last-child)::after, .holo-hub::after {
+  content: "";
+  position: absolute;
+  background: #b6f21a45 linear-gradient(90deg, transparent 20%, #dfff8c 50%, transparent 80%) 0 0 / 240% 100%;
+  box-shadow: 0 0 9px #b6f21a38;
+  height: 1px;
+}
+.holo-step:not(:last-child)::after { top: 32px; left: 78px; right: -22px; }
+.holo-benefits { display: grid; grid-template-columns: minmax(140px, .8fr) 2fr; gap: clamp(24px, 5vw, 64px); align-items: center; }
+.holo-hub { position: relative; display: grid; justify-items: center; gap: 12px; color: var(--q-lime); font-weight: 600; }
+.holo-hub .holo-icon { width: clamp(88px, 12vw, 152px); border-radius: 24px; }
+.holo-hub::after { width: clamp(28px, 5vw, 64px); right: calc(clamp(24px, 5vw, 64px) * -1); top: 50%; }
+.holo-branches { list-style: none; margin: 0; padding: 0 0 0 clamp(12px, 2vw, 22px); border-left: 1px solid #b6f21a55; display: grid; gap: 10px; }
+.holo-branches li { display: flex; align-items: center; gap: 16px; padding: 13px; border-radius: 12px; background: #16221bd9; }
+.holo-branches .holo-icon { width: 46px; flex: 0 0 46px; border-radius: 10px; }
+.holo-branches h3 { margin-top: 0; }
+.holo-live .holo-step:not(:last-child)::after, .holo-live .holo-hub::after { animation: signal-travel 3.1s linear infinite; }
+.holo-live .holo-icon { animation: holo-glow 4s ease-in-out infinite; }
+.holo-live li:nth-child(even) .holo-icon { animation-delay: .6s; }
+@keyframes signal-travel { from { background-position: 155% 0; } to { background-position: -85% 0; } }
+@keyframes holo-glow { 50% { box-shadow: inset 0 0 18px #b6f21a26, 0 0 26px #b6f21a35; } }
+@keyframes content-glide {
+  from { opacity: .62; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.motion-enter { animation-name: content-glide; animation-duration: .78s; }
+@media (max-width: 740px) {
+  .holo-flow, .holo-benefits { grid-template-columns: 1fr; }
+  .holo-flow { gap: 23px; }
+  .holo-step { display: grid; grid-template-columns: 50px 1fr; column-gap: 14px; }
+  .holo-step .holo-icon { width: 50px; grid-row: span 2; }
+  .holo-step h3 { margin: 0 0 4px; }
+  .holo-step:not(:last-child)::after { width: 1px; height: 16px; left: 25px; right: auto; top: auto; bottom: -20px; }
+  .holo-hub::after { width: 1px; height: 18px; left: 50%; right: auto; top: calc(100% + 2px); }
+  .holo-branches { border-left: 0; border-top: 1px solid #b6f21a55; padding: 12px 0 0; }
+}
