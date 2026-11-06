@@ -128,13 +128,13 @@ nav [aria-current] { text-decoration: underline; text-underline-offset: 6px; }
 .demo-items { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); gap: 12px; margin: 22px 0 0; padding: 0; }
 .demo-items li { padding: 12px; border: 1px solid var(--divider); }
 .demo-items span { margin-right: 8px; }
-.close { background: var(--q-lime); color: var(--q-night); }
+.close {
+  background: radial-gradient(ellipse at 88% 0%, color-mix(in srgb, var(--q-lime) 9%, var(--q-graphite)), transparent 68%), var(--q-graphite);
+  border-block: 1px solid var(--divider);
+}
 .close-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; padding-block: 44px; }
-.close .label { color: var(--q-lime-ink-light); }
-.close p:not(.label) { margin-top: 12px; max-width: 54ch; }
-.close .button { flex-shrink: 0; background: var(--q-night); color: var(--q-off-white); }
-.close .button:hover { background: var(--q-graphite); }
-.close :focus-visible { outline-color: var(--q-night); }
+.close p:not(.label) { margin-top: 12px; max-width: 54ch; color: var(--q-text-secondary-dark); }
+.close .button { flex-shrink: 0; }
 .contact-panel { border: 1px solid var(--divider); border-radius: 8px; padding: clamp(18px, 4vw, 36px); background: var(--q-graphite); }
 .contact-panel h2 { font-size: 1.8rem; }
 .contact-panel p { color: var(--q-text-secondary-dark); margin-block: 14px 20px; }
