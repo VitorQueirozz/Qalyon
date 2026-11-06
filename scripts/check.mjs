@@ -32,7 +32,9 @@ for (const page of pages) {
 const home = await readFile('dist/index.html', 'utf8');
 assert.ok(home.includes(site.slogan));
 assert.doesNotMatch(home, /hero-\d|loop-\d/);
-assert.doesNotMatch(home.match(/<section class="hero-stage">[\s\S]*?<\/section>/)[0], /<img\b/);
+const hero = home.match(/<section class="hero-stage">[\s\S]*?<\/section>/)[0];
+const heroImages = [...hero.matchAll(/<img\b[^>]*\bsrc="([^"]+)"[^>]*>/g)];
+assert.deepEqual(heroImages.map(([, src]) => src), ['/assets/logo.webp']);
 assert.match(home, /<canvas id="neural-canvas"/);
 assert.doesNotMatch(home, /<video\b|\.mp4/);
 await access(join('dist', 'assets', 'neural.js'));

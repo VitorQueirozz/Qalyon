@@ -16,6 +16,9 @@ const servicePath = service => `/servicos/${service.slug}/`;
 const projectPath = project => `/projetos/${project.slug}/`;
 const productPath = product => `/produtos/${product.slug}/`;
 
+const brandImage = (alt, className) =>
+  `<img${className ? ' class="' + className + '"' : ''} src="/assets/logo.webp" width="600" height="190" alt="${alt}">`;
+
 const picture = (key, extra = '') => `<img class="photo ${extra}" src="/assets/${key}-640.webp"
   srcset="/assets/${key}-640.webp 640w, /assets/${key}-1280.webp 1280w"
   sizes="(max-width: 720px) 92vw, 46vw" width="640" height="360"
@@ -209,7 +212,9 @@ const home = `
   <canvas id="neural-canvas" width="960" height="540"></canvas>
 </div>
 <div class="wrap home-hero">
-  <div class="hero-main">${heading('Software house brasileira', site.slogan,
+  <div class="hero-main">
+  ${brandImage('Qalyon Tecnologia', 'hero-brand')}
+  ${heading('Software house brasileira', site.slogan,
     'A Qalyon cria seus próprios SaaS e desenvolve sites, landing pages, portfólios profissionais e sistemas web sob medida.')}
   <div class="actions">${quote()}${link('/servicos/', 'Explorar serviços')}</div></div>
   <aside class="hero-index" aria-label="Frentes da Qalyon">
@@ -411,7 +416,7 @@ export const pages = [
 
 export function layout(page, origin, isPreview) {
   const active = path => page.path.startsWith(path) ? ' aria-current="' + (page.path === path ? 'page' : 'location') + '"' : '';
-  const logo = `<a class="brand" href="/" aria-label="Qalyon, início"><img src="/assets/logo.webp" width="600" height="188" alt="Qalyon Tecnologia"></a>`;
+  const logo = `<a class="brand" href="/" aria-label="Qalyon, início">${brandImage('')}</a>`;
   const socialImage = origin + '/assets/social.png';
   return `<!doctype html>
 <html lang="pt-BR" data-theme="dark">
@@ -440,7 +445,8 @@ export function layout(page, origin, isPreview) {
   `<a href="${path}"${active(path)}>${label}</a>`).join('')}</nav>
 <a class="button header-cta" href="/contato/">Solicitar orçamento <span aria-hidden="true">↗</span></a></div></header>
 <main id="conteudo" tabindex="-1">${page.body}</main>
-<footer class="footer"><div class="wrap footer-inner">${logo}<p>${site.slogan}</p>
+<footer class="footer"><div class="wrap footer-inner">
+  <div class="footer-brand">${logo}<p>${site.slogan}</p></div>
 ${page.path === '/' ? '' : '<button type="button" class="motion-toggle footer-motion" id="motion-toggle" hidden>Pausar movimento</button>'}
 <a href="/privacidade/"${active('/privacidade/')}>Privacidade</a><span>© ${new Date().getUTCFullYear()} Qalyon</span></div></footer>
 </body></html>`;
