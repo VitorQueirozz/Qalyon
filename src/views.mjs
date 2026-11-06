@@ -430,7 +430,7 @@ export function layout(page, origin, isPreview) {
   <meta property="og:description" content="${escape(page.description)}"><meta property="og:url" content="${origin + page.path}">
   <meta property="og:image" content="${socialImage}"><meta property="og:image:alt" content="Logotipo Qalyon Tecnologia">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="/assets/favicon.png"><link rel="stylesheet" href="/assets/tokens.css">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon-symbol.png"><link rel="stylesheet" href="/assets/tokens.css">
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="module" src="/assets/motion.js"></script>
   ${page.path === '/' ? '<script type="module" src="/assets/experience.js"></script>' : ''}
