@@ -66,7 +66,10 @@ nav [aria-current] { text-decoration: underline; text-underline-offset: 6px; }
 .hero-index a { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; border-top: 1px solid var(--divider); padding: 18px 0; }
 .hero-index a:hover { color: var(--q-lime); }
 .hero-index small { display: block; color: var(--q-text-secondary-dark); font-size: .8rem; }
-.band { border-block: 1px solid var(--divider); }
+.band {
+  border-block: 1px solid var(--divider);
+  background: linear-gradient(90deg, var(--q-graphite), #20291d 50%, var(--q-graphite));
+}
 .band-inner { display: flex; flex-wrap: wrap; gap: 12px 35px; justify-content: space-between; padding-block: 16px; color: var(--q-text-secondary-dark); font: .72rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .04em; }
 .page-intro { padding-block: clamp(60px, 8vw, 110px) 35px; }
 .page-intro h1 { max-width: 18ch; }
@@ -180,21 +183,38 @@ form button { margin-top: 16px; }
 
 /* Precision lighting and the neural canvas sit behind the page content. */
 main { position: relative; isolation: isolate; }
-main::before, .hero-stage::after {
+main::before, main::after, .hero-stage::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset-inline: 0;
   pointer-events: none;
   z-index: -1;
-  background:
-    linear-gradient(132deg, transparent 44%, #a6e9200d 48%, #b6f21a48 49.85%, #b6f21a90 50%, #99de101d 50.15%, transparent 55%) top right / min(52vw, 720px) 600px no-repeat,
-    linear-gradient(132deg, transparent 38%, #a4df130d 45%, #b6f21a49 49.85%, #b6f21a80 50%, #a3f0161a 50.25%, transparent 59%) bottom left / min(46vw, 570px) 380px no-repeat;
+  background-repeat: no-repeat;
 }
-main:has(.hero-stage)::before { background-position: right 1050px, bottom left; }
+main::before, .hero-stage::after {
+  inset-block-start: 0;
+  height: clamp(280px, 48vw, 600px);
+  background-image:
+    linear-gradient(132deg, transparent 44%, #b6f21a0d 48%, #b6f21a60 50%, #b6f21a12 50.3%, transparent 55%),
+    radial-gradient(ellipse at right top, #b6f21a12, transparent 66%);
+  background-position: right top;
+  background-size: min(100%, 760px) 100%, 100% 100%;
+  mask-image: radial-gradient(ellipse at right top, #000 32%, transparent 78%);
+}
+main::after {
+  inset-block-end: 0;
+  height: clamp(220px, 38vw, 400px);
+  background-image:
+    linear-gradient(132deg, transparent 43%, #b6f21a0d 48%, #b6f21a48 50%, #b6f21a12 50.3%, transparent 57%),
+    radial-gradient(ellipse at left bottom, #b6f21a10, transparent 68%);
+  background-position: left bottom;
+  background-size: min(100%, 620px) 100%, 100% 100%;
+  mask-image: radial-gradient(ellipse at left bottom, #000 28%, transparent 76%);
+}
+main:has(.hero-stage)::before { content: none; }
 .hero-stage { position: relative; isolation: isolate; overflow: hidden; }
 .hero-stage::after {
-  z-index: -1;
-  background-size: min(44vw, 620px) 480px, min(34vw, 480px) 300px;
+  max-height: 100%;
   opacity: .72;
   animation: precision-light 4.5s ease-out both;
 }
@@ -242,9 +262,8 @@ main:has(.hero-stage)::before { background-position: right 1050px, bottom left; 
   transform: translateY(-4px);
 }
 .page-intro { animation: precision-arrive .55s ease-out both; }
-.band { background: #0e1317cb; }
 @keyframes precision-arrive { from { transform: translateY(14px); } to { transform: translateY(0); } }
-@keyframes precision-light { from { opacity: .30; transform: translateX(14px); } to { opacity: .72; transform: translateX(0); } }
+@keyframes precision-light { from { opacity: .30; } to { opacity: .72; } }
 
 @media (max-width: 720px) {
   .home-hero { min-height: 0; padding-bottom: 76px; }
