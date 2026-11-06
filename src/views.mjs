@@ -74,10 +74,26 @@ const projectCards = () => `<div class="cards showcase-grid">${projects.map(proj
     </div>
   </article>`).join('')}</div>`;
 
+const productPreview = product => product.preview ? `
+  <figure class="product-preview">
+    <figcaption><span>Fluxo previsto</span><small>Exemplo ilustrativo</small></figcaption>
+    <strong>${escape(product.preview.title)}</strong>
+    <ol>${product.preview.stages.map(([stage, status], index) => `
+      <li${index === 1 ? ' class="product-preview-current"' : ''}>
+        <span>${escape(stage)}</span><span>${escape(status)}</span>
+      </li>`).join('')}</ol>
+  </figure>` : '';
+
 const productCards = () => `<div class="product-list">${products.map(product => `
-  <article class="atlas-card"><div><p class="label">Produto próprio / ${product.status}</p>
-  <h3>${product.title}<span> by Qalyon</span></h3><p>${product.summary}</p></div>
-  ${link(productPath(product), 'Conhecer ' + product.title)}</article>`).join('')}</div>`;
+  <article class="atlas-card">
+    <div class="product-copy">
+      <p class="label product-status">${product.status}</p>
+      <h3>${product.title}<span>by Qalyon</span></h3>
+      <p>${product.summary}</p>
+      ${link(productPath(product), 'Conhecer ' + product.title)}
+    </div>
+    ${productPreview(product)}
+  </article>`).join('')}</div>`;
 
 const steps = items => `<ol class="steps">${items.map(([title, description]) => `
   <li>
@@ -213,7 +229,7 @@ const home = `
   'Demonstrações autorais para explorar soluções, conteúdo e navegação em diferentes contextos.')}</div>
   ${link('/projetos/', 'Explorar o mostruário')}</div>
   ${projectCards()}</div></section>
-<section class="wrap section">${sectionTitle('Produtos próprios', 'Software para processos do dia a dia.')}${productCards()}</section>
+<section class="wrap section">${sectionTitle('Produtos próprios', 'Do orçamento ao pagamento, em um só fluxo.')}${productCards()}</section>
 ${flowSection}
 ${metricsSection}
 ${benefitsSection}
@@ -245,12 +261,12 @@ ${pageIntro('Serviços digitais', service.title, service.summary, quote(service.
 const productsPage = `
 ${pageIntro('Produtos próprios', 'Produtos criados pela Qalyon.',
   'Desenvolvemos SaaS próprios para organizar processos e facilitar o trabalho de quem presta serviços.')}
-<section class="wrap section compact">${sectionTitle('Catálogo de produtos', 'Conheça o Atlas.')}${productCards()}</section>`;
+<section class="wrap section compact">${sectionTitle('Primeiro SaaS da Qalyon', 'Do orçamento ao pagamento.')}${productCards()}</section>`;
 
 const productPage = product => `
 ${pageIntro('Produto próprio / ' + product.status, product.title + ' by Qalyon', product.summary)}
-<section class="wrap section compact split"><div>${sectionTitle('Contexto', 'Cada serviço tem uma sequência.')}</div>
-  <div class="body-copy"><p>${product.problem}</p><p>O produto está em desenvolvimento. As etapas abaixo descrevem o fluxo previsto para a primeira versão.</p></div></section>
+<section class="wrap section compact split"><div>${sectionTitle('Contexto', 'Cada serviço tem uma sequência.')}<p class="lead">${product.problem}</p></div>
+  ${productPreview(product)}</section>
 <section class="tinted"><div class="wrap section">${sectionTitle('Em desenvolvimento', 'Fluxo previsto do Atlas.')}${steps(product.flow)}</div></section>
 <section class="wrap section compact">${link('/produtos/', 'Voltar para produtos')}</section>`;
 

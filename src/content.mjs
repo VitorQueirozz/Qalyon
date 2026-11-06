@@ -51,8 +51,17 @@ export const services = [
 
 export const products = [{
   slug: 'atlas', title: 'Atlas', status: 'Em desenvolvimento',
-  summary: 'Um SaaS para organizar atendimentos e serviços, do primeiro orçamento ao registro do pagamento.',
+  summary: 'O Atlas está sendo criado para ajudar profissionais autônomos e pequenas empresas a acompanhar cada serviço, do cadastro do cliente ao registro do pagamento.',
   problem: 'Quando contatos, orçamentos, agenda e execução ficam espalhados em mensagens e planilhas, acompanhar o andamento de cada serviço exige trabalho manual. O Atlas está sendo desenvolvido para reunir essas etapas em um só fluxo.',
+  preview: {
+    title: 'Instalação de iluminação',
+    stages: [
+      ['Orçamento', 'Aprovado'],
+      ['Visita técnica', 'Agendada'],
+      ['Ordem de serviço', 'A iniciar'],
+      ['Pagamento', 'A registrar'],
+    ],
+  },
   flow: [
     ['Cadastrar o cliente', 'Reunir os dados necessários para identificar e atender o cliente.'],
     ['Preparar o orçamento', 'Registrar a proposta e acompanhar sua aprovação.'],
