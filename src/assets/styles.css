@@ -149,7 +149,7 @@ form button { margin-top: 16px; }
 .footer { border-top: 1px solid var(--divider); }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 25px; padding-block: 25px; font-size: .8rem; color: var(--q-text-secondary-dark); }
 .footer-brand { flex: 1 1 280px; display: grid; gap: 8px; }
-.footer .brand { width: clamp(150px, 17vw, 205px); }
+.footer .brand { width: 135px; }
 .footer a:not(.brand) { min-height: 44px; display: inline-flex; align-items: center; }
 .footer a:hover { color: var(--q-lime); }
 
